@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,9 +81,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "mypoll",  # 연결할 Database 이름
+        "USER": "HaneulJO",  # 사용자 username
+        "PASSWORD": "!gksmf153",
+        "HOST": "mypoll-db.cpioiw00egd5.ap-northeast-2.rds.amazonaws.com",
+        "PORT": "3306"
     }
 }
 
@@ -170,3 +181,5 @@ STATIC_ROOT = BASE_DIR / 'static_collection'
 ##################
 MEDIA_ROOT = BASE_DIR / "media" # 업로드 파일 저장 디렉토리
 MEDIA_URL = "/media/" # 업로드 파일 요청할 시작 url
+
+
